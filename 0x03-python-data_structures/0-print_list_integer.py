@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-def print_list_integer(my_list=[]):
-    for i in my_list:
-        print("{:d}".format(i))
+def print_list_integer(a=[]):
+    for i in a:
+        print('{:d}'.format(i))
 
