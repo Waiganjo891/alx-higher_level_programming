@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 """A class named base."""
+import json
+import csv
+import turtle
 
 
 class Base:
