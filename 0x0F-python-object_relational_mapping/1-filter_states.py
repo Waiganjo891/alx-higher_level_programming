@@ -4,13 +4,30 @@ import MySQLdb
 import sys
 
 
-if __name__ == "__main__":
-    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
-                         passwd=sys.argv[2], db=sys.argv[3], port=3306)
-    cur = db.cursor()
-    cur.execute("SELECT id, name FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-    rows = cur.fetchall()
+def list_states_starting_with_N(user, password, db_name):
+    conn = MySQLdb.connect(
+        host='localhost', user=user, passwd=password, db=db_name
+    )
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT id, name FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+    )
+    rows = cursor.fetchall()
     for row in rows:
         print(row)
-    cur.close()
-    db.close()
+    cursor.close()
+    conn.close()
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print(
+            "Usage: python script.py <mysql_username> <mysql_password> "
+            "<database_name>"
+        )
+        sys.exit(1)
+    user = sys.argv[1]
+    password = sys.argv[2]
+    db_name = sys.argv[3]
+    list_states_starting_with_N(user, password, db_name)
