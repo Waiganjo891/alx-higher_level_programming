@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script fetches the status from,
+This script fetches the status from
 https://alx-intranet.hbtn.io/status using the urllib package.
 """
 
