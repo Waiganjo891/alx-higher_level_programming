@@ -1,13 +1,11 @@
 #!/bin/bash
 # Check if a URL is provided
+# Send request using curl and get the size of the response body in bytes
+# Display the size of the response body
 
-if [ -z "$1" ]; then
+if [ $# -ne 1 ]; then
     echo "Usage: $0 <URL>"
     exit 1
 fi
-content_length=$(curl -sI "$1" | grep -i "Content-Length" | awk '{print $2}')
-if [ -z "$content_length" ]; then
-    echo "Content-Length header not found in the response."
-    exit 1
-fi
-echo "Size of the body: $content_length bytes"
+response_size=$(curl -s -o /dev/null -w "%{size_download}" "$1")
+echo "$response_size"
